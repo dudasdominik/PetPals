@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetPals", "PetPals.csproj", "{34D7BECC-DB58-48AE-BB0C-4BF322E8932A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34D7BECC-DB58-48AE-BB0C-4BF322E8932A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34D7BECC-DB58-48AE-BB0C-4BF322E8932A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34D7BECC-DB58-48AE-BB0C-4BF322E8932A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34D7BECC-DB58-48AE-BB0C-4BF322E8932A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
