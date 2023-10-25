@@ -10,6 +10,7 @@ public class NotificationModel
 
     public NotificationType NotificationType { get; set; }
     public UserModel Sender { get; set; }
+    public UserModel Reciever { get; set; }
     public DateTime TimeStamp { get; set; }
     public string Body { get; set; }
     public string LinkToItem { get; set; }
