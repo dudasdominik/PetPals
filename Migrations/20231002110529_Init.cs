@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetPals.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,6 +64,7 @@ namespace PetPals.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     NotificationType = table.Column<int>(type: "integer", nullable: false),
                     SenderId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RecieverId = table.Column<Guid>(type: "uuid", nullable: false),
                     TimeStamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Body = table.Column<string>(type: "text", nullable: false),
                     LinkToItem = table.Column<string>(type: "text", nullable: false),
@@ -101,11 +102,11 @@ namespace PetPals.Migrations
                     Password = table.Column<string>(type: "text", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     JoinDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ProfilePictureId = table.Column<Guid>(type: "uuid", nullable: false),
-                    BannerPictureId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProfilePictureId = table.Column<Guid>(type: "uuid", nullable: true),
+                    BannerPictureId = table.Column<Guid>(type: "uuid", nullable: true),
                     Location = table.Column<string>(type: "text", nullable: false),
                     Bio = table.Column<string>(type: "text", nullable: false),
-                    Role = table.Column<string>(type: "text", nullable: false),
+                    Role = table.Column<string>(type: "text", nullable: true),
                     isVerified = table.Column<bool>(type: "boolean", nullable: false),
                     LastLoginDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Gender = table.Column<int>(type: "integer", nullable: false),
@@ -125,14 +126,12 @@ namespace PetPals.Migrations
                         name: "FK_user_photo_BannerPictureId",
                         column: x => x.BannerPictureId,
                         principalTable: "photo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_user_photo_ProfilePictureId",
                         column: x => x.ProfilePictureId,
                         principalTable: "photo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -330,6 +329,11 @@ namespace PetPals.Migrations
                 column: "SenderId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_notification_RecieverId",
+                table: "notification",
+                column: "RecieverId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_notification_SenderId",
                 table: "notification",
                 column: "SenderId");
@@ -404,6 +408,14 @@ namespace PetPals.Migrations
                 name: "FK_message_user_SenderId",
                 table: "message",
                 column: "SenderId",
+                principalTable: "user",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_notification_user_RecieverId",
+                table: "notification",
+                column: "RecieverId",
                 principalTable: "user",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);

@@ -12,8 +12,8 @@ using PetPals.Models;
 namespace PetPals.Migrations
 {
     [DbContext(typeof(PetPalsContext))]
-    [Migration("20230921131041_Initial")]
-    partial class Initial
+    [Migration("20231002110529_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -142,6 +142,9 @@ namespace PetPals.Migrations
                     b.Property<int>("NotificationType")
                         .HasColumnType("integer");
 
+                    b.Property<Guid>("RecieverId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("SenderId")
                         .HasColumnType("uuid");
 
@@ -149,6 +152,8 @@ namespace PetPals.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RecieverId");
 
                     b.HasIndex("SenderId");
 
@@ -252,7 +257,7 @@ namespace PetPals.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("BannerPictureId")
+                    b.Property<Guid?>("BannerPictureId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Bio")
@@ -298,11 +303,10 @@ namespace PetPals.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ProfilePictureId")
+                    b.Property<Guid?>("ProfilePictureId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TagName")
@@ -431,11 +435,19 @@ namespace PetPals.Migrations
 
             modelBuilder.Entity("PetPals.Models.NotificationModel", b =>
                 {
+                    b.HasOne("PetPals.Models.UserModel", "Reciever")
+                        .WithMany()
+                        .HasForeignKey("RecieverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PetPals.Models.UserModel", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Reciever");
 
                     b.Navigation("Sender");
                 });
@@ -485,9 +497,7 @@ namespace PetPals.Migrations
                 {
                     b.HasOne("PetPals.Models.PhotoModel", "BannerPicture")
                         .WithMany()
-                        .HasForeignKey("BannerPictureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BannerPictureId");
 
                     b.HasOne("PetPals.Models.ChatRoomModel", null)
                         .WithMany("Participants")
@@ -495,9 +505,7 @@ namespace PetPals.Migrations
 
                     b.HasOne("PetPals.Models.PhotoModel", "ProfilePicture")
                         .WithMany()
-                        .HasForeignKey("ProfilePictureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProfilePictureId");
 
                     b.Navigation("BannerPicture");
 

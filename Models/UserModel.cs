@@ -22,12 +22,11 @@ public class UserModel
     public string Password { get; set; }
     [Required]
     public DateTime BirthDate { get; set; }
-
-    public DateTime JoinDate { get; set; } = DateTime.Now;
-    
-    public PhotoModel ProfilePicture { get; set; }
-    
-    public PhotoModel BannerPicture { get; set; }
+    public DateTime JoinDate { get; set; } = DateTime.Now.ToUniversalTime();
+    [AllowNull]
+    public PhotoModel? ProfilePicture { get; set; }
+    [AllowNull]
+    public PhotoModel? BannerPicture { get; set; }
 
     public ICollection<PostModel> OwnPosts { get; set; } = new List<PostModel>();
     
@@ -38,20 +37,36 @@ public class UserModel
     public ICollection<UserModel> Followers { get; set; } = new List<UserModel>();
     
     public ICollection<UserModel> Followings { get; set; } = new List<UserModel>();
-    
-    public string Location { get; set; }
-    
-    public string Bio { get; set; }
-    
-    public string Role { get; set; }
-
-    public bool isVerified { get; set; } = false;
-    
-    public DateTime LastLoginDate { get; set; }
+    [AllowNull]
+    public string? Location { get; set; }
+    [AllowNull]
+    public string? Bio { get; set; }
+    [AllowNull]
+    public string? Role { get; set; }
+    [AllowNull]
+    public bool? isVerified { get; set; } = false;
+    [AllowNull]
+    public DateTime? LastLoginDate { get; set; }
     [Required]
     public Gender Gender { get; set; }
     [Required]
     public string FirstName { get; set; }
     [Required]
     public string LastName { get; set; }
+
+
+    public UserModel(Guid id, string userName, string tagName, string email,string phoneNumber, string password, DateTime birthDate, DateTime joinDate, Gender gender, string firstName, string lastName)
+    {
+        Id = id;
+        UserName = userName;
+        TagName = tagName;
+        Email = email;
+        PhoneNumber = phoneNumber;
+        Password = password;
+        BirthDate = birthDate;
+        JoinDate = joinDate;
+        Gender = gender;
+        FirstName = firstName;
+        LastName = lastName;
+    }
 }
