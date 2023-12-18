@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 namespace PetPals.Models;
-
+#pragma warning disable CS1591
 public class PetPalsContext : DbContext
 {
     public PetPalsContext(DbContextOptions<PetPalsContext> contextOptions) : base(contextOptions)
@@ -51,3 +51,4 @@ public class PetPalsContext : DbContext
             .HasForeignKey(p => p.SenderId);
     }
 }
+#pragma warning restore CS1591

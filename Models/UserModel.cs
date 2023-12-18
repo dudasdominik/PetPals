@@ -55,9 +55,8 @@ public class UserModel
     public string LastName { get; set; }
 
 
-    public UserModel(Guid id, string userName, string tagName, string email,string phoneNumber, string password, DateTime birthDate, DateTime joinDate, Gender gender, string firstName, string lastName)
+    public UserModel(string userName, string tagName, string email,string phoneNumber, string password, DateTime birthDate, DateTime joinDate, Gender gender, string firstName, string lastName)
     {
-        Id = id;
         UserName = userName;
         TagName = tagName;
         Email = email;

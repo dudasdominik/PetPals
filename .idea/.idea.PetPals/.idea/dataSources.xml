@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/PetPals</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="PetPals@localhost [2]" uuid="f80d0e61-b1e5-4402-ada9-394d67be86ec">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:3254/PetPals</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

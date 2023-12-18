@@ -4,8 +4,6 @@ namespace PetPals.Models.DTOs;
 
 public class CreateUserDTO
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
     public string LastName { get; set; }
     public string FirstName { get; set; }
     public DateTime BirthDate { get; set; }
@@ -17,10 +15,8 @@ public class CreateUserDTO
     public string PhoneNumber { get; set; }
     public DateTime JoinDate { get; set; } = DateTime.Now.ToUniversalTime();
 
-    public CreateUserDTO(Guid id, string lastName, string firstName, DateTime birthDate, Gender gender, string username, string tagname, string password, string email, string phoneNumber)
+    public CreateUserDTO(string lastName, string firstName, DateTime birthDate, Gender gender, string username, string tagname, string password, string email, string phoneNumber)
     {
-        
-        Id = id;
         LastName = lastName;
         FirstName = firstName;
         BirthDate = birthDate;
@@ -32,8 +28,19 @@ public class CreateUserDTO
         PhoneNumber = phoneNumber;
     }
 
-    public static implicit operator UserModel(CreateUserDTO user)
+    public UserModel ToUserModel()
     {
-        return new UserModel(user.Id, user.Username, user.Tagname, user.Email, user.PhoneNumber, user.Password, user.BirthDate, user.JoinDate, user.Gender, user.FirstName, user.LastName);
+        return new UserModel(
+            Username,
+            Tagname,
+            Email,
+            PhoneNumber,
+            Password,
+            BirthDate,
+            JoinDate,
+            Gender,
+            FirstName,
+            LastName
+        );
     }
 }

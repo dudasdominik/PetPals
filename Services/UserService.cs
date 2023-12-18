@@ -40,7 +40,7 @@ public class UserService : IUserService
             return null;
         }
 
-        var changedUser = (UserModel)newUser;
+        var changedUser = newUser.ToUserModel();
         
         _context.UserModels.Add(changedUser);
         await _context.SaveChangesAsync();
@@ -55,7 +55,7 @@ public class UserService : IUserService
     public async Task<UserModel> SignInUser(LoginCredentialsDTO creds)
     {
         var userByEmail =  await GetUserByEmail(creds.Email);
-        if (userByEmail == null) throw new RuntimeBinderException();  //change this
+        if (userByEmail == null) throw new Exception();  //change this
         if (!userByEmail.Password.Equals(creds.Password)) throw new Exception(); //change also
         return userByEmail;
     }

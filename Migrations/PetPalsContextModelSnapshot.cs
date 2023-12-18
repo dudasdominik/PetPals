@@ -13,6 +13,7 @@ namespace PetPals.Migrations
     [DbContext(typeof(PetPalsContext))]
     partial class PetPalsContextModelSnapshot : ModelSnapshot
     {
+
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

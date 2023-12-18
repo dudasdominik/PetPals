@@ -14,7 +14,9 @@ public class UserController : ControllerBase
     {
         _userService = userService;
     }
-
+    /// <summary>
+    /// Lists all Users from database
+    /// </summary>
     [HttpGet]
     public async Task<List<UserModel>> ShowAllUsers()
     {
@@ -26,7 +28,10 @@ public class UserController : ControllerBase
     {
         return await _userService.GetUserById(userId);
     }
-
+    
+    /// <summary>
+    /// Creates a new User from the given body
+    /// </summary>
     [HttpPost("new")]
     public async Task<UserModel> PostNewUser([FromBody] CreateUserDTO user)
     {
